@@ -6,10 +6,10 @@ import { queenMoves } from "../../queen";
 import towerMoves from "../../tower";
 import { blackPieces, whitePieces } from "./../../../../table/dataTable";
 import { detectCheck } from "./detectCheck";
-export default function checkAnalisys() {
+export default function checkAnalisys(): string[] {
   let whiteMoves: Array<HTMLElement | null> = [];
   let blackMoves: Array<HTMLElement | null> = [];
-
+  let check: string[];
   for (let i = 1; i <= 64; i++) {
     let piece: string = String(document.getElementById("box" + i)?.textContent);
     let box: HTMLElement | null = document.getElementById("box" + i);
@@ -19,12 +19,17 @@ export default function checkAnalisys() {
     if (blackPieces.includes(piece))
       blackMoves.push(...checkAnalisysBlack(piece, box));
   }
-
-  detectCheck(whiteMoves, blackMoves);
+  /*La variable Check es un array de dos valores. La dinámica es la siguiente: Si round es true (es decir, es turno
+    de las blancas), el primer valor del array nos hará saber si la piezas del cual es turno está en jaque o no.
+    Así sabremos si validar o invalidar el movimiento después. 
+    
+    El segundo valor es para detectar si las piezas enemigas están en jaque y envíar un aviso.*/
+  check = detectCheck(whiteMoves, blackMoves);
+  return check;
 }
 
-/*this function detects if the white pieces is checking the black king. The function will 
-analyze the white pieces to detect their movements and if one movement intercepts with the black king*/
+/*La funcion CheckAnalisysWhite detecta si alguna pieza blanca está haciendo jaque al rey negro.
+Recoge los movimientos de cada pieza blanca para ver cual movimiento intercepta al rey negro*/
 function checkAnalisysWhite(
   piece: string,
   box: HTMLElement | null
@@ -53,8 +58,8 @@ function checkAnalisysWhite(
   }
 }
 
-/*this function detects if the black pieces is checking the white king. The function will analyze the 
-black pieces to detect their movements and if one movement intercepts with the white king king*/
+/*La funcion CheckAnalisysWhite detecta si alguna pieza negra está haciendo jaque al rey blanco.
+Recoge los movimientos de cada pieza negra para ver cual movimiento intercepta al rey blanco*/
 function checkAnalisysBlack(
   piece: string,
   box: HTMLElement | null

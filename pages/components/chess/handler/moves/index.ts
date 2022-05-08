@@ -11,8 +11,14 @@ export function movePiece(
   const colorPiece = whitePieces.includes(piece);
 
   if (correctMove && round === colorPiece) {
+    let recoveryToMove = toMove.textContent;
+    let recoveryPieceBox = pieceBox.textContent;
     toMove.textContent = piece;
     pieceBox.textContent = "";
-    roundChange();
+    if (!roundChange()) {
+      toMove.textContent = recoveryToMove;
+      pieceBox.textContent = recoveryPieceBox;
+      alert("no puedes mover, estas en jaque");
+    }
   }
 }

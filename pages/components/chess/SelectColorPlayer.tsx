@@ -4,6 +4,7 @@ import { ChessContext } from "../../context/ChessContext";
 import Table from "./table/Table";
 function SelectColor() {
   const { colorPlayer, setColorPlayer } = useContext(ChessContext);
+
   return (
     <>
       {colorPlayer === "" ? (

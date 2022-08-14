@@ -1,4 +1,4 @@
-import { piecesType } from "./../../../../../../interface/pieceType";
+import { piecesType } from "../../../../../../interface/piecesType";
 import { blackPieces, whitePieces } from "./../../../../table/dataTable";
 import { checkAnalisysBlack } from "./checkAnalysisBlack";
 import { checkAnalisysWhite } from "./checkAnalysisWhite";
@@ -23,6 +23,20 @@ export default function checkAnalisys(): string[] {
   let whiteMoves: Array<HTMLElement | null> = [];
   let blackMoves: Array<HTMLElement | null> = [];
   let check: string[];
+  piecesData = {
+    blackPieces: {
+      piece: [],
+      box: [],
+      moves: [[]],
+    },
+    whitePieces: {
+      piece: [],
+      box: [],
+      moves: [[]],
+    },
+    totalMovesWhite: [],
+    totalMovesBlack: [],
+  };
 
   for (let i = 1; i <= 64; i++) {
     let piece: string = String(document.getElementById("box" + i)?.textContent);

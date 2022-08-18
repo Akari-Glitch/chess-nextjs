@@ -5,6 +5,7 @@ import { resetProtectedPieces } from "./../moves/comprobation/protectedPieces";
 export let round = true;
 export function roundChange(): boolean {
   let check = checkAnalisys();
+
   checkmate(check[1]);
   if (check[0] === "NONE_CHECK") {
     if (check[1] !== "NONE_CHECK") {

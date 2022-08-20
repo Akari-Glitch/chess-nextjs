@@ -22,7 +22,6 @@ export default function towerMoves(
   downDMoves = addingMoves("DOWN", downD, colorPiece, numPieceBox);
   rightDMoves = addingMoves("RIGHT", rightD, colorPiece, numPieceBox);
   leftDMoves = addingMoves("LEFT", leftD, colorPiece, numPieceBox);
-
   moves = [...upDMoves, ...downDMoves, ...rightDMoves, ...leftDMoves];
 
   return whatReturn(required, toMove, moves);

@@ -18,6 +18,8 @@ export function kingMoves(
   const downNum: number = 8;
   const downRNum: number = 9;
   const downLNum: number = 7;
+  const castlingLargeNum: number = -2;
+  const castlingShortNum: number = 2;
   const friendly = colorPiece ? whitePieces : blackPieces;
 
   const up: HTMLElement | null = getElement(upNum, numPieceBox);
@@ -28,6 +30,14 @@ export function kingMoves(
   const down: HTMLElement | null = getElement(downNum, numPieceBox);
   const downR: HTMLElement | null = getElement(downRNum, numPieceBox);
   const downL: HTMLElement | null = getElement(downLNum, numPieceBox);
+  const castlingLarge: HTMLElement | null = getElement(
+    castlingLargeNum,
+    numPieceBox
+  );
+  const castlingShort: HTMLElement | null = getElement(
+    castlingShortNum,
+    numPieceBox
+  );
 
   moves = moveComprobation(
     up,
@@ -38,6 +48,9 @@ export function kingMoves(
     down,
     downR,
     downL,
+    castlingShort,
+    castlingLarge,
+    colorPiece,
     numPieceBox,
     friendly
   );

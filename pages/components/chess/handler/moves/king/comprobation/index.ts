@@ -1,5 +1,6 @@
 import friendlyPiece from "../../comprobation/friendlyPiece";
-
+import { castlingBlack, castlingWhite } from "../..";
+import { castling } from "../castling";
 export function moveComprobation(
   up: HTMLElement | null,
   upR: HTMLElement | null,
@@ -9,6 +10,9 @@ export function moveComprobation(
   down: HTMLElement | null,
   downR: HTMLElement | null,
   downL: HTMLElement | null,
+  castlingShort: HTMLElement | null,
+  castlingLarge: HTMLElement | null,
+  colorPiece: boolean,
   numPieceBox: number,
   friendly: string[]
 ): Array<HTMLElement | null> {
@@ -35,6 +39,43 @@ export function moveComprobation(
   /*adding left*/
   if ((numPieceBox + 7) % 8 !== 0 && friendlyPiece(left, friendly)) {
     correctMoves.push(left);
+  }
+
+  const castlingMovesShort: Array<HTMLElement | null> = [right, castlingShort];
+  if (
+    right?.textContent === "" &&
+    castlingShort?.textContent === "" &&
+    castling(castlingMovesShort, colorPiece)
+  ) {
+    if (colorPiece && castlingWhite.king && castlingWhite.short) {
+      correctMoves.push(castlingShort);
+    } else if (!colorPiece && castlingBlack.king && castlingBlack.short) {
+      correctMoves.push(castlingShort);
+    }
+  }
+
+  const castlingLNum: number = Number(castlingLarge?.id.slice(3));
+  console.log(castlingLNum);
+  const moveLarge: HTMLElement | null = document.getElementById(
+    "box" + (castlingLNum - 1)
+  );
+  const castlingMovesLarge: Array<HTMLElement | null> = [
+    left,
+    castlingLarge,
+    moveLarge,
+  ];
+
+  if (
+    left?.textContent === "" &&
+    castlingLarge?.textContent === "" &&
+    moveLarge?.textContent === "" &&
+    castling(castlingMovesLarge, colorPiece)
+  ) {
+    if (colorPiece && castlingWhite.king && castlingWhite.large) {
+      correctMoves.push(castlingLarge);
+    } else if (!colorPiece && castlingBlack.king && castlingBlack.large) {
+      correctMoves.push(castlingLarge);
+    }
   }
 
   /*adding down, downR and downL*/

@@ -1,4 +1,5 @@
 import { blackPieces } from "./../../../../table/dataTable";
+import { passantWhite } from "../passant";
 export function moveComprobationWhite(
   normalMov: HTMLElement | null,
   doubleMov: HTMLElement | null,
@@ -7,6 +8,20 @@ export function moveComprobationWhite(
   numPieceBox: number
 ): Array<HTMLElement | null> {
   let correctMoves: Array<HTMLElement | null> = [];
+  const pieceBoxParent = document.getElementById("box" + numPieceBox)
+    ?.parentNode as HTMLElement;
+  const enemyPieceParent = passantWhite.enemyPieceBox?.parentNode;
+  //add passantWhite
+
+  if (
+    (passantWhite.enemyPieceNumR === numPieceBox ||
+      passantWhite.enemyPieceNumL === numPieceBox) &&
+    passantWhite.passantMove !== null &&
+    enemyPieceParent == pieceBoxParent
+  ) {
+    correctMoves.push(passantWhite.passantMove);
+  }
+
   //add normalMov (white)
   if (normalMov?.textContent === "") {
     correctMoves.push(normalMov);

@@ -55,7 +55,6 @@ export function moveComprobation(
   }
 
   const castlingLNum: number = Number(castlingLarge?.id.slice(3));
-  console.log(castlingLNum);
   const moveLarge: HTMLElement | null = document.getElementById(
     "box" + (castlingLNum - 1)
   );

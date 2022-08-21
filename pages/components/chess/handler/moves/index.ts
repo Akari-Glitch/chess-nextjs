@@ -34,7 +34,7 @@ export function movePiece(
           passantEnemy = passantWhite.enemyPieceBox as HTMLElement;
           passantEnemy.textContent = "";
         } else if (!colorPiece && toMove === passantBlack.passantMove) {
-          passantEnemy = passantWhite.enemyPieceBox as HTMLElement;
+          passantEnemy = passantBlack.enemyPieceBox as HTMLElement;
           passantEnemy.textContent = "";
         }
         queenPawn(toMove, piece);
